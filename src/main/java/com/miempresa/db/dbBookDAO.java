@@ -24,7 +24,7 @@ public class dbBookDAO extends Database implements BookDAO {
     @Override
     public void registrar(Book libro) {
         try {
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement(
                     "INSERT INTO book (id, title) VALUES (?,?);"
             );
@@ -43,7 +43,7 @@ public class dbBookDAO extends Database implements BookDAO {
     public void modificar(Book libro, int id) {
         
         try {
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement;
             preparedStatement = conexion.prepareStatement("UPDATE book SET id = ?, title = ? WHERE id = ?");
             preparedStatement.setInt(1, libro.getId());
@@ -62,7 +62,7 @@ public class dbBookDAO extends Database implements BookDAO {
      @Override
     public void eliminar(int idBook) {
          try {
-             Connection conexion  = getConnection();
+             getConnection();
              PreparedStatement preparedStatement = conexion.prepareStatement("DELETE FROM book WHERE id = ?");
              preparedStatement.setInt(1, idBook);
              preparedStatement.executeUpdate();
@@ -77,7 +77,7 @@ public class dbBookDAO extends Database implements BookDAO {
     public List<Book> listar() {
          List<Book> libros = null;
         try{
-            Connection conexion = getConnection(); 
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement( "SELECT *  FROM book;");
             libros = new ArrayList();
             
@@ -101,7 +101,7 @@ public class dbBookDAO extends Database implements BookDAO {
     public Book obtenerBookById(int idBook) {
         try {
             Book libro = new Book();
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement("SELECT * FROM book WHERE id = ? LIMIT 1;");
             preparedStatement.setInt(1, idBook);
             ResultSet resultSet = preparedStatement.executeQuery();

@@ -22,7 +22,7 @@ public class dbUserDAO extends Database implements UserDAO{
     @Override
     public void registrar(User usuario) {
         try{
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement(
                      "INSERT INTO user (nombre) VALUES (?);"
              );
@@ -39,7 +39,7 @@ public class dbUserDAO extends Database implements UserDAO{
     @Override
     public void modificar(User usuario) {
         try{
-            Connection conexion = Database.getConnection();
+            getConnection();
              PreparedStatement preparedStatement = conexion.prepareStatement(
                      "UPDATE user SET nombre = ? WHERE id = ?"
              );
@@ -58,7 +58,7 @@ public class dbUserDAO extends Database implements UserDAO{
     @Override
     public void eliminar(int id) {
         try{
-            Connection conexion =  getConnection();
+            getConnection();
 
             PreparedStatement preparedStatement = conexion.prepareStatement("DELETE FROM user WHERE id = ?;");
             preparedStatement.setInt(1, id);
@@ -77,7 +77,7 @@ public class dbUserDAO extends Database implements UserDAO{
     public List<User> listar() {
         List<User> usuarios = null;
         try{
-            Connection conexion = getConnection(); 
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement( "SELECT *  FROM user;");
             usuarios = new ArrayList();
             
@@ -110,7 +110,7 @@ public class dbUserDAO extends Database implements UserDAO{
         
         try {
             User usuario = new User();
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement("SELECT *  FROM user WHERE id = ? LIMIT 1;");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

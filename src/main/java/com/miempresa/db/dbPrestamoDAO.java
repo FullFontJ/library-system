@@ -24,7 +24,7 @@ public class dbPrestamoDAO extends Database implements PrestamoDAO{
     @Override
     public void registrar(Prestamo prestamo) {
         try {
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement prepareStatement = conexion.prepareStatement("INSERT INTO prestamo (user, book, fecha_prestamo) VALUES (?,?,?)");
             LocalDate fechaActual = LocalDate.now();
             
@@ -43,7 +43,7 @@ public class dbPrestamoDAO extends Database implements PrestamoDAO{
     @Override
     public void modificar(Prestamo prestamo) {
         try {
-            Connection conexion = getConnection();
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement("UPDATE prestamo SET fecha_entrega = ? WHERE user = ? AND book = ? AND fecha_entrega IS NULL ORDER BY id DESC LIMIT 1");
             LocalDate fechaActual = LocalDate.now();
 
@@ -63,7 +63,7 @@ public class dbPrestamoDAO extends Database implements PrestamoDAO{
     public List<Prestamo> listar(){
         List<Prestamo> prestamos = null;
         try{
-            Connection conexion = getConnection(); 
+            getConnection();
             PreparedStatement preparedStatement = conexion.prepareStatement( 
                     "SELECT p.id, p.fecha_prestamo, u.nombre AS usuario, b.title AS libro FROM prestamo p"
                             + " JOIN user u ON p.user = u.id "
