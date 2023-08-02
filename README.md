@@ -2,5 +2,5 @@
 
 
 
-![usuarios](screenshot/users.png)
-![libros](screenshot/book.png)
+![usuarios](screenshots/users.png)
+![libros](screenshots/book.png)
